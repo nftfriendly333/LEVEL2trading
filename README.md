@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -31,13 +30,14 @@
   .wrap{max-width:1320px;margin:0 auto;padding:16px 18px 40px}
 
   /* ---------- header ---------- */
-  header{display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  header{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;
     padding:10px 4px 16px;border-bottom:1px solid var(--line)}
   .brand{display:flex;flex-direction:column;line-height:1;margin-right:6px}
   .brand .mark{font-family:var(--disp);font-weight:600;font-size:23px;letter-spacing:.3px;
     color:var(--gold);display:flex;align-items:center;gap:9px}
   .brand .mark .crest{font-size:20px;filter:grayscale(.15)}
   .brand .sub{font-size:10.5px;letter-spacing:2.6px;text-transform:uppercase;color:var(--muted2);margin-top:6px;font-weight:600}
+  .brand-actions{display:flex;gap:8px;margin-top:12px}
 
   .tabs{display:flex;gap:8px;margin-left:2px}
   .tab{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);
@@ -188,10 +188,54 @@
   .ord .cancel:hover{color:var(--ask);border-color:var(--ask)}
   .ordempty{color:var(--muted2);font-size:12px;text-align:center;padding:12px 0;font-style:italic}
 
-  @media (max-width:1080px){.floor{grid-template-columns:1fr 1fr}.ticketcard{grid-column:1/-1}}
-  @media (max-width:720px){
-    .floor{grid-template-columns:1fr}.purse{width:100%;margin:8px 0 0;justify-content:space-between}
-    .tabs{width:100%}.tab{flex:1;min-width:0}
+  @media (max-width:1080px){
+    .floor{grid-template-columns:1fr 1fr}
+    .ticketcard{grid-column:1/-1}
+  }
+  @media (max-width:760px){
+    .wrap{padding:14px 13px 36px}
+    header{gap:12px;padding:8px 2px 14px}
+    .brand{width:100%;margin-right:0}
+    .brand-actions{margin-top:10px}
+    .tabs{width:100%;margin-left:0}
+    .tab{flex:1;min-width:0;padding:9px 11px}
+    .purse{width:100%;margin:4px 0 0;gap:14px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+    .floor{grid-template-columns:1fr;gap:12px}
+    .stack{gap:12px}
+    canvas{height:180px}
+    .modal-back{padding:10px}
+    .modal{max-height:94vh}
+    .ltabs{padding:12px 14px 0}
+    .lbody{padding:16px 14px 20px}
+  }
+  @media (max-width:440px){
+    .wrap{padding:12px 11px 32px}
+    .brand .mark{font-size:20px}
+    .brand .sub{font-size:9.5px;letter-spacing:2px}
+    .brand-actions{width:100%}
+    .brand-actions .ghost-btn{flex:1;text-align:center;padding:10px 8px}
+    .purse{gap:8px}
+    .stat{align-items:flex-start}
+    .stat .lbl{font-size:9px;letter-spacing:1px}
+    .stat .val{font-size:15px}
+    #resetBtn{margin-left:auto;align-self:center}
+    .tab{padding:8px 9px;gap:7px}
+    .tab .ic{font-size:18px}
+    .tab .nm{font-size:11px}
+    .tab .px{font-size:14px}
+    .tab .chg{font-size:10px}
+    .colhdr{padding:4px 8px 7px}
+    .row{font-size:12.5px;padding:3px 8px;min-height:24px}
+    .row .cum{font-size:10.5px}
+    .spread{margin:5px 4px}
+    .spread .last{font-size:18px}
+    .spread .meta{font-size:10px}
+    .ticket{padding:12px}
+    .holdings{grid-template-columns:1fr 1fr;gap:7px}
+    .seg button{font-size:13px;padding:11px}
+    .lbtn{min-width:100%}
+    .chips{gap:6px}
+    .chip{font-size:12px;padding:6px 11px}
   }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   .footnote{margin-top:22px;text-align:center;color:var(--muted2);font-size:11px}
@@ -275,6 +319,10 @@
     <div class="brand">
       <div class="mark"><span class="crest">⚖️</span>Guild Exchange</div>
       <div class="sub">Player&nbsp;vs&nbsp;Market · Level&nbsp;2 Order&nbsp;Book</div>
+      <div class="brand-actions">
+        <button class="ghost-btn" id="guideBtn">How to read this</button>
+        <button class="ghost-btn learn-btn" id="learnBtn">Learn to trade</button>
+      </div>
     </div>
 
     <div class="tabs" id="tabs"></div>
@@ -283,8 +331,6 @@
       <div class="stat"><span class="lbl">Purse</span><span class="val gold" id="goldVal">10,000g</span></div>
       <div class="stat"><span class="lbl">Net worth</span><span class="val" id="netVal">—</span></div>
       <div class="stat"><span class="lbl">Session P&L</span><span class="val" id="pnlVal">+0g</span></div>
-      <button class="ghost-btn" id="guideBtn">How to read this</button>
-      <button class="ghost-btn learn-btn" id="learnBtn">Learn to trade</button>
       <button class="ghost-btn" id="resetBtn">Reset</button>
     </div>
   </header>
